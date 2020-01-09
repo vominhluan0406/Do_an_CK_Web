@@ -41,13 +41,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['email'])) {
         $email = $_POST['email'];
     }
-
+    if (isset($_POST['ngaysinh'])) {
+        $ngaysinh = $_POST['ngaysinh'];
+    }
     // update
-    $value = [$name, $diachi, $sdt, $cmnd, $email];
-    $key = ['HoTen', 'DiaChi', 'SDT', 'CMND', 'Email'];
+    $value = [$name,$ngaysinh, $diachi, $sdt, $cmnd, $email];
+    $key = ['HoTen','NgaySinh', 'DiaChi', 'SDT', 'CMND', 'Email'];
 
     $_SESSION['canhan_update'] = $db->update('khachhang', $value, $key, 'UserName', $_POST['user']);
     header("Location: /Nhom04_WebsiteBanXeMay/customer.php");
+    exit;
     }
 }
 ?>

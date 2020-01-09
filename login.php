@@ -1,10 +1,18 @@
 <?php
 session_start();
+
+// Đăng xuất
 if (isset($_SESSION['user'])) {
-  header("Location: /Nhom04_WebsiteBanXeMay/index.php");
+  // xóa ls xem
+  if (isset($_SESSION['xemganday']))
+    unset($_SESSION['xemganday']);
+  // Xóa giỏ hàng
+  if (isset($_SESSION['cart']))
+    unset($_SESSION['cart']);
   unset($_SESSION['user']);
+  header("Location: /Nhom04_WebsiteBanXeMay/");
 }
-if (isset($_SESSION['admin'])){
+if (isset($_SESSION['admin'])) {
   unset($_SESSION['admin']);
 }
 ?>

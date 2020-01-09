@@ -11,14 +11,14 @@ if (isset($_SESSION['cart'])) {
         $sluong += intval($value['qty']);
         $tongtien += $value['qty'] * ($db->fetchIDOne('sanpham', '*', 'MaSp', $key)['Gia']);
     }
-    if (isset($_GET['coupon_code'])) {
-        $mgg = strtoupper($_GET['coupon_code']);
+    // Lấy mgg từ url
+    if (isset($_GET['coupon'])) {
+        $mgg = strtoupper($_GET['coupon']);
         $num = $db->find('khuyenmai', [$mgg], ['MaKM']);
         if ($num == 0)
             $giamgia = 0;
         else
             $giamgia = $db->fetchIDOne('khuyenmai', 'Giam', 'MaKM', $mgg)['Giam'];
-        $_SESSION['giamgia'] = $giamgia;
     }
 }
 ?>
@@ -50,7 +50,8 @@ if (isset($_SESSION['cart'])) {
                 <div style="margin: 1em auto;border: solid black 1px;box-shadow: 5px 5px 15px 15px #888888;">
                     <div class="product-content-right">
                         <div class="woocommerce">
-                            <form method="post" action="">
+                            <!-- Form -->
+                            <form method="POST" action="checkout.php">
                                 <table cellspacing="0" class="shop_table cart">
                                     <thead>
                                         <tr>
@@ -62,6 +63,7 @@ if (isset($_SESSION['cart'])) {
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <!-- Danh sach sp trong gio hang -->
                                         <?php
                                         foreach ($_SESSION['cart'] as $key => $value) {
                                             $sp = $db->fetchIDOne('sanpham', '*', 'MaSp', $key);
@@ -84,21 +86,22 @@ if (isset($_SESSION['cart'])) {
                                                         <a href="libraries/cart.php?id=<?php echo $key ?>&qty=1" class="btn">+</a>
                                                     </div>
                                                 </td>
-
                                                 <th class="<?php echo number_format($tong) ?> VND">
                                                     <span class="amount"><?php echo number_format($tong) ?> VND</span>
                                                 </th>
                                                 <th class="product-subtotal">
-                                                    <a href="public/customer/xuly/xoasp.php?id=<?php echo $key ?>">X</a>
+                                                    <a href="libraries/cart.php?id=<?php echo $key ?>&qty=-1">X</a>
                                                 </th>
                                             </tr>
                                         <?php } ?>
                                         <tr>
                                             <td class="actions" colspan="6">
+                                                <!-- Nhap Ma giam gia -->
                                                 <div class="coupon">
-                                                    <input type="text" placeholder="Mã giảm giá" value="" id="coupon_code" class="input-text" name="coupon_code">
-                                                    <input type="submit" value="Áp dụng" name="apply_coupon">
+                                                    <input type="text" placeholder="Mã giảm giá" value="<?php if(isset($_GET['coupon'])) echo $_GET['coupon']?>" id="coupon_code" class="input-text" name="coupon_code">
+                                                    <input type="submit" name="add_coupon" value="Xác nhận" />
                                                 </div>
+                                                <!-- /Nhap Ma giam gia -->
                                                 <?php if ($giamgia != 0) { ?>
                                                     <div>
                                                         <input type="text" readonly value="<?php echo $db->fetchIDOne('khuyenmai', '*', 'MaKM', $mgg)['NoiDung'] ?>">
@@ -139,9 +142,7 @@ if (isset($_SESSION['cart'])) {
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <a href="checkout.php" class="btn checkout-button button alt wc-forward">
-                                        <h1>Thanh toán</h1>
-                                    </a>
+                                    <button type="submit" name="check_out"><h2>Thanh toán</h2></button>
                                 </div>
                             </form>
                         </div>

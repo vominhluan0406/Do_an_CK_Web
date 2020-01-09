@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . "/public/customer/layouts/header.php";
 require_once __DIR__ . "/public/customer/layouts/menu.php";
-require_once __DIR__ . "/libraries/database.php";
 
 if (isset($_GET['id'])) {
     if (!isset($_SESSION['xemganday']))
@@ -34,32 +33,123 @@ if (isset($_GET['id'])) {
     <div class="zigzag-bottom"></div>
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
-                <div class="single-sidebar">
-                    <h2 class="sidebar-title">Tìm kiếm</h2>
-                    <!-- Tim kiem -->
-                    <form autocomplete="off" action="">
-                        <div class="autocomplete" style="width:300px;">
-                            <input id="myInput" type="text" name="xe" placeholder="Tìm kiếm sản phẩm...">
-                        </div>
-                        <input type="submit" value="Tìm">
-                    </form>
-                </div>
 
-                <div class="single-sidebar">
-                    <h2 class="sidebar-title">Sản phẩm</h2>
-
-                    <!-- San pham -->
-                    <div class="thubmnail-recent">
-                        <img src="img/product-thumb-1.jpg" class="recent-thumb" alt="">
-                        <h2><a href="">Sony Smart TV - 2015</a></h2>
-                        <div class="product-sidebar-price">
-                            <ins>$700.00</ins>
-                        </div>
+            <div class="col-md-12">
+                <div class="product-content-right">
+                    <div class="product-breadcroumb">
+                        <a href="">Trang chủ</a>
+                        <a href="">Sản phẩm</a>
+                        <a href=""><?php echo $product['TenSP'] ?></a>
                     </div>
 
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="product-images">
+                                <div class="product-main-img">
+                                    <img src="img/<?php echo $product['Anh']; ?>" alt="">
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="col-sm-6">
+                            <div class="product-inner">
+                                <h2 class="product-name"><?php echo $product['TenSP'] ?></h2>
+                                <div class="product-inner-price">
+                                    <ins><?php echo number_format($product['Gia']) ?> VND</ins>
+                                </div>
+
+                                <form action="libraries/cart.php" class="cart">
+                                    <div class="quantity">
+                                        <input id="numberic" type="number" size="4" class="input-text qty text" title="Qty" value="" name="qty" min="1" step="1">
+                                    </div>
+                                    <div class="product-option-shop">
+                                        <input type="text" value="<?php echo $product['MaSp'] ?>" name="id" hidden>
+                                        <input type="submit" value="Thêm vào giỏ hàng">
+                                    </div>
+                                </form>
+
+                                <div class="product-inner-category">
+                                    <p>Hãng: <a href=""><?php echo $product['HangSX'] ?></a> Loại: <a href="shop.php?id=<?php echo $product['MaLoai'] ?>"><?php echo $db->fetchIDOne('loaisp', 'TenLoai', 'MaLoai', $product['MaLoai'])['TenLoai'] ?></a> </p>
+                                </div>
+
+                                <div role="tabpanel">
+                                    <ul class="product-tab" role="tablist">
+                                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Thông tin</a></li>
+                                        <?php if (isset($_SESSION['user'])) { ?>
+                                            <li role="presentation"><a href="#danhgia" aria-controls="profile" role="tab" data-toggle="tab">Đánh giá</a></li>
+                                        <?php } ?>
+                                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Xem Đánh giá</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane fade in active" id="home">
+                                            <h2>Thông tin sản phẩm</h2>
+                                            <p><?php echo $product['GioiThieu'] . '</br></br>' . $product['ThongTin'] ?></p>
+                                        </div>
+                                        <!-- Đánh giá -->
+                                        <?php if (isset($_SESSION['user'])) { ?>
+                                            <div role="tabpanel" class="tab-pane fade" id="danhgia">
+                                                <form action="public/customer/xuly/binhluan.php" method="GET">
+                                                    <h2>Đánh giá</h2>
+                                                    <div class="submit-review">
+                                                        <p><label for="name">Tên</label>
+                                                            <input name="name" type="text" value="<?php echo $db->fetchIDOne('khachhang', 'HoTen', 'UserName', $user)['HoTen'] ?>">
+                                                            <input type="text" value="<?php echo $user ?>" hidden name="user">
+                                                        </p>
+                                                        <div class="rating-chooser">
+                                                            <p>Đánh giá của bạn</p>
+                                                            <input type="text" value="<?php echo $id ?>" hidden name="id">
+                                                            <div class="rating-wrap-post">
+                                                                <div class="rate">
+                                                                    <input type="radio" id="star5" name="rate" value="5" />
+                                                                    <label for="star5" title="text">5 stars</label>
+                                                                    <input type="radio" id="star4" name="rate" value="4" />
+                                                                    <label for="star4" title="text">4 stars</label>
+                                                                    <input type="radio" id="star3" name="rate" value="3" />
+                                                                    <label for="star3" title="text">3 stars</label>
+                                                                    <input type="radio" id="star2" name="rate" value="2" />
+                                                                    <label for="star2" title="text">2 stars</label>
+                                                                    <input type="radio" id="star1" name="rate" value="1" />
+                                                                    <label for="star1" title="text">1 star</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <p><label for="review">Đánh giá</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
+                                                        <p><button type="submit">Gửi</button></p>
+                                                </form>
+                                            </div>
+                                    </div>
+                                <?php } ?>
+                                <div role="tabpanel" class="tab-pane fade" id="profile" style="overflow:auto;height:15em">
+                                    <ul class="smooth-scroll list-unstyled">
+                                        <?php
+                                        $danhsach = $db->fetchOne('nhanxet', " MaSP = '$id'");
+                                        foreach ($danhsach as $item) {
+                                        ?>
+                                            <li>
+                                                <div class="product-sidebar-price">
+                                                    <ins><?php echo $db->fetchIDOne('khachhang', 'HoTen', 'UserName', $item['UserName'])['HoTen'] ?></ins>
+                                                </div>
+                                                <div class="product-wid-rating">
+                                                    <?php for ($x = 0; $x < $item['Sao']; $x++) { ?>
+                                                        <i class="fa fa-star"></i>
+                                                    <?php } ?>
+                                                </div>
+                                                <p><?php echo $item['NoiDung'] ?></p>
+                                            </li>
+                                            <hr>
+                                        <?php } ?>
+                                    </ul>
+                                </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
+
+            </div>
+            <div class="col-md-4">
+
 
                 <div class="single-sidebar">
                     <h2 class="sidebar-title">Xem gần đây</h2>
@@ -78,123 +168,42 @@ if (isset($_GET['id'])) {
                     </ul>
                 </div>
             </div>
-
             <div class="col-md-8">
-                <div class="product-content-right">
-                    <div class="product-breadcroumb">
-                        <a href="">Trang chủ</a>
-                        <a href="">Sản phẩm</a>
-                        <a href=""><?php echo $product['TenSP'] ?></a>
-                    </div>
+                <!-- <div class="related-products-wrapper"> -->
+                    <h2 class="related-products-title">Liên quan</h2>
+                    <div class="related-products-carousel">
+                        <?php
+                        $hang = $product['HangSX'];
+                        $loai = $product['MaLoai'];
+                        $sql = " MaLoai = '$loai' OR HangSX = '$hang'";
+                        $lienquan = $db->fetchOne('sanpham', $sql);
+                        foreach ($lienquan as $item) {
+                            $item = $db->fetchIDOne('sanpham', '*', ' MaSp', $item['MaSp']);
+                        ?>
+                            <!-- San pham lien quan -->
+                            <div class="single-product">
+                                <div class="product-f-image">
+                                    <img src="img/<?php echo $item['Anh'] ?>" alt="">
+                                    <div class="product-hover">
 
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="product-images">
-                                <div class="product-main-img">
-                                    <img src="img/<?php echo $product['Anh']; ?>" alt="">
+                                        <a href="single-product.php?id=<?php echo $item['MaSp'] ?>" class="view-details-link"><i class="fa fa-link"></i> Chi tiết</a>
+                                    </div>
                                 </div>
 
-                                <!-- <div class="product-gallery">
-                                    <img src="img/product-thumb-1.jpg" alt="">
-                                    <img src="img/product-thumb-2.jpg" alt="">
-                                    <img src="img/product-thumb-3.jpg" alt="">
-                                </div> -->
+                                <h2><a href="single-product.php?id=<?php echo $item['MaSp'] ?>"><?php echo $item['TenSP'] ?></a></h2>
+
+                                <div class="product-carousel-price">
+                                    <ins><?php echo number_format($item['Gia']) ?> VND</ins>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="product-inner">
-                                <h2 class="product-name"><?php echo $product['TenSP'] ?></h2>
-                                <div class="product-inner-price">
-                                    <ins><?php echo number_format($product['Gia']) ?> VND</ins>
-                                </div>
-
-                                <form action="" class="cart">
-                                    <div class="quantity">
-                                        <input id="numberic" type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
-                                    </div>
-                                    <div class="product-option-shop"><a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="70" rel="nofollow" href="#">Thêm vào giỏ hàng</a></div>
-                                </form>
-
-                                <div class="product-inner-category">
-                                    <p>Hãng: <a href=""><?php echo $product['HangSX'] ?></a> Loại: <a href="shop.php?id=<?php echo $product['MaLoai'] ?>"><?php echo $db->fetchIDOne('loaisp', 'TenLoai', 'MaLoai', $product['MaLoai'])['TenLoai'] ?></a> </p>
-                                </div>
-
-                                <div role="tabpanel">
-                                    <ul class="product-tab" role="tablist">
-                                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Thông tin</a></li>
-                                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Đánh giá</a></li>
-                                    </ul>
-                                    <div class="tab-content">
-                                        <div role="tabpanel" class="tab-pane fade in active" id="home">
-                                            <h2>Thông tin sản phẩm</h2>
-                                            <p><?php echo $product['GioiThieu'] . '</br></br>' . $product['ThongTin'] ?></p>
-
-
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane fade" id="profile">
-                                            <h2>Đánh giá</h2>
-                                            <div class="submit-review">
-                                                <p><label for="name">Tên</label> <input name="name" type="text"></p>
-                                                <p><label for="email">Email</label> <input name="email" type="email"></p>
-                                                <div class="rating-chooser">
-                                                    <p>Đánh giá của bạn</p>
-
-                                                    <div class="rating-wrap-post">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </div>
-                                                </div>
-                                                <p><label for="review">Bình luận</label> <textarea name="review" id="" cols="30" rows="10"></textarea></p>
-                                                <p><input type="submit" value="Submit"></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="related-products-wrapper">
-                        <h2 class="related-products-title">Liên quan</h2>
-                        <div class="related-products-carousel">
-                            <?php
-                            $hang = $product['HangSX'];
-                            $loai = $product['MaLoai'];
-                            $sql = " MaLoai = '$loai' OR HangSX = '$hang'";
-                            $lienquan = $db->fetchOne('sanpham',$sql);
-                            foreach ($lienquan as $item) {
-                                $item = $db->fetchIDOne('sanpham', '*', ' MaSp', $item['MaSp']);
-                            ?>
-                                <!-- San pham lien quan -->
-                                <div class="single-product">
-                                    <div class="product-f-image">
-                                        <img src="img/<?php echo $item['Anh'] ?>" alt="">
-                                        <div class="product-hover">
-
-                                            <a href="single-product.php?id=<?php echo $item['MaSp'] ?>" class="view-details-link"><i class="fa fa-link"></i> Chi tiết</a>
-                                        </div>
-                                    </div>
-
-                                    <h2><a href="single-product.php?id=<?php echo $item['MaSp'] ?>"><?php echo $item['TenSP'] ?></a></h2>
-
-                                    <div class="product-carousel-price">
-                                        <ins><?php echo number_format($item['Gia']) ?> VND</ins>
-                                    </div>
-                                </div>
-                            <?php } ?>
-
-                        </div>
-                    </div>
+                        <?php } ?>
+<!-- 
+                    </div> -->
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <?php require_once __DIR__ . "/public/customer/layouts/footer.php" ?>

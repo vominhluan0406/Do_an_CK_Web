@@ -76,7 +76,7 @@ arsort($dsach);
                                 <div class="product-f-image">
                                     <img src="img/<?php echo $item['Anh']; ?>" alt="">
                                     <div class="product-hover">
-                                        <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
+                                        <a href="libraries/cart.php?id=<?php echo $item['MaSp']; ?>&qty=1" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
                                         <a href="single-product.php?id=<?php echo $item['MaSp']; ?>" class="view-details-link"><i class="fa fa-link"></i> Chi tiết</a>
                                     </div>
                                 </div>

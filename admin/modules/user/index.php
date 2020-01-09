@@ -2,6 +2,7 @@
 $db = new Database;
 $user = $db->fetchAll("khachhang");
 ?>
+<!-- F -->
 <?php require_once __DIR__ . "/../../layouts/header.php"; ?>
 <div id="content-wrapper">
   <ol class="breadcrumb">

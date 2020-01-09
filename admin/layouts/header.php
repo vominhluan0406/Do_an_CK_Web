@@ -1,15 +1,14 @@
 <?php
 session_start();
-require_once __DIR__. "/../../libraries/database.php";
+require_once __DIR__ . "/../../libraries/database.php";
 $db = new Database;
 
 //Kiem tra 
 if (isset($_SESSION['admin'])) {
-    $num = $db->find('quantri',[$_SESSION['admin'],$_SESSION['pass']],['UserName','Password']);
-    if($num==0)
-      header("Location: /Nhom04_WebsiteBanXeMay/admin");
-}
-else{
+  $num = $db->find('quantri', [$_SESSION['admin'], $_SESSION['pass']], ['UserName', 'Password']);
+  if ($num == 0)
+    header("Location: /Nhom04_WebsiteBanXeMay/admin");
+} else {
   header("Location: /Nhom04_WebsiteBanXeMay/");
 }
 ?>
@@ -35,6 +34,37 @@ else{
 
   <!-- Custom styles for this template-->
   <link href="/Nhom04_WebsiteBanXeMay/public/admin/css/sb-admin.css" rel="stylesheet">
+
+
+  <!-- Pusher -->
+  <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
+  <script>
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('135cee8f6453c6fc2267', {
+      cluster: 'ap1',
+      forceTLS: true
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+      str = '<div class="alert alert-warning alert-dismissible fade show" role="alert">' +
+        '<strong>Có đơn đặt hàng mới </strong><a href="/Nhom04_WebsiteBanXeMay/admin/modules/donhang/chitiet.php?id=' + data['madondh'] + '">Click để xem</a>' +
+        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+        '<span aria-hidden="true">&times;</span>' +
+        '</button></div>';
+      $('#thongbao').replaceWith(str);
+    });
+    var channel = pusher.subscribe('my-channel1');
+    channel.bind('my-event', function(data) {
+      id = (data);
+
+      alert(id["message"]);
+    });
+  </script>
+
+
 </head>
 
 <body id="page-top">
@@ -54,6 +84,12 @@ else{
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto ml-md-0">
 
+      <!-- Chat -->
+      <li class="nav-item dropdown no-arrow">
+        <a class="nav-link dropdown-toggle" href="https://dashboard.tawk.to" id="chat" role="button" target="_blank">
+          <i class="fas fa-comment"></i>
+        </a>
+      </li>
 
       <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -64,10 +100,14 @@ else{
           <a class="dropdown-item" href="/Nhom04_WebsiteBanXeMay/login.php">Logout</a>
         </div>
       </li>
+
+
     </ul>
 
   </nav>
+  <div id="thongbao">
 
+  </div>
   <div id="wrapper">
     <?php @include('menu.php');
     require_once __DIR__ . "/../../libraries/function.php";

@@ -4,6 +4,7 @@ require_once __DIR__ . "../../../../libraries/database.php";
 $db = new Database;
 
 session_start();
+ob_start();
 
 // Kiem tra nguoi dung
 if (isset($_SESSION['user'])) {
@@ -46,10 +47,12 @@ if (isset($_SESSION['cart'])) {
 
     <!-- JQuery -->
     <script src="js/jquery-3.4.1.js"></script>
-    <script src="js/product-name.js"></script>
-    <script src="js/index.js"></script>
-    <script src="js/shopping-cart.js"></script>
-    <script src="js/shop.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- jQuery UI library -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -59,32 +62,10 @@ if (isset($_SESSION['cart'])) {
     <!-- <link rel="stylesheet" href="css/all.css"> -->
 
     <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="css/owl.carousel.css">
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/responsive.css">
     <style>
-        #popup {
-            display: inline-block;
-            opacity: 0;
-            position: fixed;
-            top: 20%;
-            left: 50%;
-            padding: 1em;
-            transform: translateX(-50%);
-            background: #fff;
-            border: 1px solid #888;
-            box-shadow: 1px 1px .5em 0 rgba(0, 0, 0, .5);
-            transition: opacity .3s ease-in-out;
-        }
-
-        #popup.hidden {
-            display: none;
-        }
-
-        #popup.fade-in {
-            opacity: 1;
-        }
-
         /* Dropdown Cart */
         .dropdown-content {
             display: none;
@@ -107,6 +88,49 @@ if (isset($_SESSION['cart'])) {
             padding: 12px 16px;
             text-decoration: none;
             display: block;
+        }
+
+        /* Đánh giá */
+        .rate {
+            float: left;
+            height: 46px;
+            padding: 0 10px;
+        }
+
+        .rate:not(:checked)>input {
+            position: absolute;
+            top: -9999px;
+        }
+
+        .rate:not(:checked)>label {
+            float: right;
+            width: 1em;
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 30px;
+            color: #ccc;
+        }
+
+        .rate:not(:checked)>label:before {
+            content: '★ ';
+        }
+
+        .rate>input:checked~label {
+            color: #ffc700;
+        }
+
+        .rate:not(:checked)>label:hover,
+        .rate:not(:checked)>label:hover~label {
+            color: #deb217;
+        }
+
+        .rate>input:checked+label:hover,
+        .rate>input:checked+label:hover~label,
+        .rate>input:checked~label:hover,
+        .rate>input:checked~label:hover~label,
+        .rate>label:hover~input:checked~label {
+            color: #c59b08;
         }
     </style>
 
@@ -186,7 +210,7 @@ if (isset($_SESSION['cart'])) {
                     <div class="dropdown">
                         <div class="shopping-item">
                             <a href="cart.php">Giỏ hàng
-                                <span class="cart-amunt"><?php if(isset($_SESSION['cart'])) echo number_format($tongtien); ?> VND</span>
+                                <span class="cart-amunt"><?php if (isset($_SESSION['cart'])) echo number_format($tongtien); ?> VND</span>
                                 <i class="fa fa-shopping-cart"></i>
                                 <span class="product-count" <?php if (isset($_SESSION['cart'])) echo 'style="display: block;"' ?>><?php echo $sluong ?></span>
                             </a>

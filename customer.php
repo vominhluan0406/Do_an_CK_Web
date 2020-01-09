@@ -9,6 +9,10 @@ if (isset($_SESSION['user'])) {
     $db = new Database;
     $thongtin = $db->fetchIDOne('khachhang', '*', 'UserName', $_SESSION['user']);
 }
+if(isset($_GET['xoa'])){
+    $id = $_GET['xoa'];
+    $db->delete('nhanxet','MaNX',$id);
+}
 ?>
 
 <!-- ND -->
@@ -41,6 +45,10 @@ if (isset($_SESSION['user'])) {
             <div class="form-group col-md-12">
                 <label>Họ và Tên</label>
                 <input type="text" class="form-control" name="hoten" value="<?php echo $thongtin['HoTen'] ?>">
+            </div>
+            <div class="form-group col-md-12">
+                <label>Ngày sinh</label>
+                <input type="date" class="form-control" name="ngaysinh" value="<?php echo $thongtin['NgaySinh'] ?>">
             </div>
             <div class="form-group col-md-12">
                 <label>Địa chỉ</label>
@@ -100,7 +108,7 @@ if (isset($_SESSION['user'])) {
     </div>
 
     <!-- Xem bình luận -->
-<?php } else if (parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY) == 'bl') { ?>
+<?php } else if (parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY) == 'bl'||isset($_GET['xoa'])) { ?>
     <div class="overlay-content">
         <table class="table table-striped">
             <thead>
@@ -128,8 +136,7 @@ if (isset($_SESSION['user'])) {
                             </div>
                         </td>
                         <td>
-                            <a href="">Sửa    </a>
-                            <a href="">    Xóa</a>
+                            <a href="customer.php?bl&xoa=<?php echo $item['MaNX']  ?>"> Xóa</a>
                         </td>
                     </tr>
                 <?php } ?>

@@ -1,7 +1,7 @@
 <?php require_once __DIR__ . "/../../../libraries/database.php";
 $db = new Database;
 
-$dondh = $db->fetchIDOne('dondh','*','MaDonDH',$_GET['id']);
+$dondh = $db->fetchIDOne('dondh', '*', 'MaDonDH', $_GET['id']);
 
 $id = $_GET['id'];
 $chitietdh = $db->fetchOne('chitietdondh', " MaDonDH = $id");
@@ -28,6 +28,11 @@ $chitietdh = $db->fetchOne('chitietdondh', " MaDonDH = $id");
                     <input type="text" class="form-control" readonly value="<?php echo  $dondh['UserName'] ?>">
                 </div>
             </div>
+            <div class="form-group">
+                <label>Ghi chú</label>
+                <textarea class="form-control" name="gioithieu" rows="3" readonly><?php echo $db->fetchIDOne('dondh', 'GhiChu', 'MaDonDH', $id)['GhiChu'] ?>
+                </textarea>
+            </div>
         </div>
 
         <!-- chi tiet -->
@@ -36,15 +41,13 @@ $chitietdh = $db->fetchOne('chitietdondh', " MaDonDH = $id");
                 <tr>
                     <th>Sản phẩm</th>
                     <th>Số lượng</th>
-                    <th>Thành tiền</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($chitietdh as $item) : ?>
                     <tr>
-                        <td><?php echo $item['MaSP'] ?></td>
+                        <td><?php echo $db->fetchIDOne('sanpham', 'TenSP', 'MaSp', $item['MaSP'])['TenSP'] ?></td>
                         <td><?php echo $item['SoLuong'] ?></td>
-                        <td><?php echo $item['DonGia'] ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
