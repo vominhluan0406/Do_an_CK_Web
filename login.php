@@ -10,7 +10,7 @@ if (isset($_SESSION['user'])) {
   if (isset($_SESSION['cart']))
     unset($_SESSION['cart']);
   unset($_SESSION['user']);
-  header("Location: /Nhom04_WebsiteBanXeMay/");
+  header("Location: /");
 }
 if (isset($_SESSION['admin'])) {
   unset($_SESSION['admin']);
@@ -43,7 +43,7 @@ if (isset($_SESSION['admin'])) {
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">Đăng nhập</div>
       <div class="card-body">
-        <form method="POST" action="/Nhom04_WebsiteBanXeMay/public/customer/dangnhap.php">
+        <form method="POST" action="/public/customer/dangnhap.php">
           <div class="form-group">
             <div class="form-label-group">
               <input type="text" name="user" id="inputEmail" class="form-control" placeholder="Email address" required>

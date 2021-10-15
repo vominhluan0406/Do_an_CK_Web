@@ -38,7 +38,7 @@ $donhang = $db->fetchAll('dondh');
                 <td><?php echo $item['UserName'] ?></td>
                 <td><?php echo $item['Ngay'] ?></td>
                 <td>
-                  <a href="/Nhom04_WebsiteBanXeMay/admin/modules/donhang/chitiet.php?id=<?php echo $item['MaDonDH'] ?>" class="btn btn-info">Chi tiết</a>
+                  <a href="/admin/modules/donhang/chitiet.php?id=<?php echo $item['MaDonDH'] ?>" class="btn btn-info">Chi tiết</a>
                 </td>
               </tr>
             <?php endforeach; ?>

@@ -40,8 +40,8 @@ $user = $db->fetchAll("khachhang");
                 <td><?php echo $item['Email'] ?></td>
                 <td><?php echo $item['SDT'] ?></td>
                 <td>
-                  <a class="btn btn-primary" href="/Nhom04_WebsiteBanXeMay/admin/modules/user/edit.php?id=<?php echo $item['MaKH'];?>"><i class="fa fa-edit"></i>Sửa</a>
-                  <a class="btn btn-danger" href="/Nhom04_WebsiteBanXeMay/admin/modules/user/delete.php?id=<?php echo $item['MaKH'];?>"><i class="fa fa-times"></i>Xóa</a>
+                  <a class="btn btn-primary" href="/admin/modules/user/edit.php?id=<?php echo $item['MaKH'];?>"><i class="fa fa-edit"></i>Sửa</a>
+                  <a class="btn btn-danger" href="/admin/modules/user/delete.php?id=<?php echo $item['MaKH'];?>"><i class="fa fa-times"></i>Xóa</a>
                 </td>
               </tr>
             <?php }endforeach; ?>

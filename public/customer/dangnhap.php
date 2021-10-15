@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $num = $db->find('khachhang', $value, $key);
             if ($num == 0) {
                 $_SESSION['dangnhap'] = "Tài khoản hoặc mật khẩu không chính xác!";
-                header("Location: /Nhom04_WebsiteBanXeMay/login.php");
+                header("Location: /login.php");
             } else {
                 $_SESSION['user'] = $user;
                 if (isset($_SESSION['xemganday']))
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     }
                     var_dump($_SESSION['cart']);
                 }
-                header("Location: /Nhom04_WebsiteBanXeMay");
+                header("Location: /");
             }
         }
         //Tai khoan admin
@@ -58,11 +58,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $num = $db->find('quantri', $value, $key);
             if ($num == 0) {
                 $_SESSION['dangnhap'] = "Tài khoản hoặc mật khẩu không chính xác!";
-                header("Location: /Nhom04_WebsiteBanXeMay/login.php");
+                header("Location: /login.php");
             } else {
                 $_SESSION['admin'] = $user;
                 $_SESSION['pass']  = md5($password);
-                header("Location: /Nhom04_WebsiteBanXeMay/admin");
+                header("Location: /admin");
             }
         }
     }

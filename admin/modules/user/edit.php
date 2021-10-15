@@ -3,7 +3,7 @@ $db = new Database;
 if (isset($_GET['id']))
   $user = $db->fetchIDOne('khachhang', '*', 'MaKH', $_GET['id']);
 if(!$user){
-  header("Location: /Nhom04_WebsiteBanXeMay/admin/modules/user");
+  header("Location: /admin/modules/user");
 }
 ?>
 
@@ -44,7 +44,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
   $value = [$id,$ten,$username,$email,$cmnd,$sdt,$diachi];
   $db->update('khachhang',$value,$key,'MaKH',$id);
   
-  header("Location: /Nhom04_WebsiteBanXeMay/admin/modules/user");
+  header("Location: /admin/modules/user");
 }
 
 ?>

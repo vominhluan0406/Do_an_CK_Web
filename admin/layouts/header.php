@@ -7,9 +7,9 @@ $db = new Database;
 if (isset($_SESSION['admin'])) {
   $num = $db->find('quantri', [$_SESSION['admin'], $_SESSION['pass']], ['UserName', 'Password']);
   if ($num == 0)
-    header("Location: /Nhom04_WebsiteBanXeMay/admin");
+    header("Location: /admin");
 } else {
-  header("Location: /Nhom04_WebsiteBanXeMay/");
+  header("Location: /");
 }
 ?>
 
@@ -27,13 +27,13 @@ if (isset($_SESSION['admin'])) {
   <title>Quan li</title>
 
   <!-- Custom fonts for this template-->
-  <link href="/Nhom04_WebsiteBanXeMay/public/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="/public/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Page level plugin CSS-->
-  <link href="/Nhom04_WebsiteBanXeMay/public/admin/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <link href="/public/admin/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="/Nhom04_WebsiteBanXeMay/public/admin/css/sb-admin.css" rel="stylesheet">
+  <link href="/public/admin/css/sb-admin.css" rel="stylesheet">
 
 
   <!-- Pusher -->
@@ -50,7 +50,7 @@ if (isset($_SESSION['admin'])) {
     var channel = pusher.subscribe('my-channel');
     channel.bind('my-event', function(data) {
       str = '<div class="alert alert-warning alert-dismissible fade show" role="alert">' +
-        '<strong>Có đơn đặt hàng mới </strong><a href="/Nhom04_WebsiteBanXeMay/admin/modules/donhang/chitiet.php?id=' + data['madondh'] + '">Click để xem</a>' +
+        '<strong>Có đơn đặt hàng mới </strong><a href="/admin/modules/donhang/chitiet.php?id=' + data['madondh'] + '">Click để xem</a>' +
         '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
         '<span aria-hidden="true">&times;</span>' +
         '</button></div>';
@@ -71,7 +71,7 @@ if (isset($_SESSION['admin'])) {
 
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="/Nhom04_WebsiteBanXeMay/admin">Quản lý</a>
+    <a class="navbar-brand mr-1" href="/admin">Quản lý</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
@@ -96,8 +96,8 @@ if (isset($_SESSION['admin'])) {
           <i class="fas fa-user-circle fa-fw"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-          <a class="dropdown-item" href="/Nhom04_WebsiteBanXeMay/admin/mk.php">Đổi mật khẩu</a>
-          <a class="dropdown-item" href="/Nhom04_WebsiteBanXeMay/login.php">Logout</a>
+          <a class="dropdown-item" href="/admin/mk.php">Đổi mật khẩu</a>
+          <a class="dropdown-item" href="/login.php">Logout</a>
         </div>
       </li>
 

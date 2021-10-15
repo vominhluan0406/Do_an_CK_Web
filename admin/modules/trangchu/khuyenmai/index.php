@@ -22,7 +22,7 @@ if (isset($_GET['id']) && isset($_GET['xoa'])) {
         <li class="breadcrumb-item active">Chương trình khuyến mãi</li>
         <li class="breadcrumb-item active">
             <td>
-                <a class="btn btn-success" href="/Nhom04_WebsiteBanXeMay/admin/modules/trangchu/khuyenmai/add.php">
+                <a class="btn btn-success" href="/admin/modules/trangchu/khuyenmai/add.php">
                     <i class="fa fa-cart-plus" aria-hidden="true"> </i> Thêm
                 </a>
             </td>
@@ -56,7 +56,7 @@ if (isset($_GET['id']) && isset($_GET['xoa'])) {
                                     <?php echo $item['NgayBD'] . " - " . $item['NgayKT'] ?>
                                 </td>
                                 <td>
-                                    <a class="btn btn-danger" href="/Nhom04_WebsiteBanXeMay/admin/modules/trangchu/khuyenmai/index.php?id=<?php echo $item['TenKM']; ?>&xoa=ok">
+                                    <a class="btn btn-danger" href="/admin/modules/trangchu/khuyenmai/index.php?id=<?php echo $item['TenKM']; ?>&xoa=ok">
                                         <i class="fa fa-times"> </i>
                                     </a>
                                 </td>

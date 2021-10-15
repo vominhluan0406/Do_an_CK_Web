@@ -34,9 +34,9 @@ $category = $db->fetchAll("anh_slide");
                                 <td><?php echo $item['STT'] ?></td>
                                 <td><?php echo $item['Loai'] ?></td>
                                 <td><?php echo $item['Link'] ?></td>
-                                <td><img id="blah" src="/Nhom04_WebsiteBanXeMay/img/<?php echo $item['Ten'] ?>" class="img-rounded" style="width:100%;height:auto;"></td>
+                                <td><img id="blah" src="/img/<?php echo $item['Ten'] ?>" class="img-rounded" style="width:100%;height:auto;"></td>
                                 <td>
-                                    <a class="btn btn-primary" href="/Nhom04_WebsiteBanXeMay/admin/modules/trangchu/edit.php?id=<?php echo $item['STT']; ?>"><i class="fa fa-edit"></i>Sửa</a>
+                                    <a class="btn btn-primary" href="/admin/modules/trangchu/edit.php?id=<?php echo $item['STT']; ?>"><i class="fa fa-edit"></i>Sửa</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

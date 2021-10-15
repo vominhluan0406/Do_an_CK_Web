@@ -12,22 +12,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $num = $db->find('khachhang',[md5($_POST['mk'])],['PassWord']);
             if($num==0){
                 $_SESSION['mk_update']="Sai mật khẩu";
-                header("Location: /Nhom04_WebsiteBanXeMay/customer.php?mk");
+                header("Location: /customer.php?mk");
             }
             else{
                 $db->update('khachhang',[md5($_POST['mk2'])],['PassWord'],'UserName',$_SESSION['user']);
                 $_SESSION['mk_update']="Thành công";
-                header("Location: /Nhom04_WebsiteBanXeMay/customer.php?mk");
+                header("Location: /customer.php?mk");
             }
         }
         else{
             $_SESSION['mk_update']="Mật khẩu không giống nhau!";
         }
-        header("Location: /Nhom04_WebsiteBanXeMay/customer.php?mk");
+        header("Location: /customer.php?mk");
     }else{
 
     if (isset($_POST['hoten'])) {
-        $name = $_POST['hoten'];
+        $name = $_POST['hoten'];bgg
     }
     if (isset($_POST['diachi'])) {
         $diachi = $_POST['diachi'];
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $key = ['HoTen','NgaySinh', 'DiaChi', 'SDT', 'CMND', 'Email'];
 
     $_SESSION['canhan_update'] = $db->update('khachhang', $value, $key, 'UserName', $_POST['user']);
-    header("Location: /Nhom04_WebsiteBanXeMay/customer.php");
+    header("Location: /customer.php");
     exit;
     }
 }

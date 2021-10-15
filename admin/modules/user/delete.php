@@ -7,5 +7,5 @@
             $db->delete('khachhang','MaKH',$_GET['id']);
         }
     }
-    header('Location: /Nhom04_WebsiteBanXeMay/admin/modules/user');
+    header('Location: /admin/modules/user');
 ?>

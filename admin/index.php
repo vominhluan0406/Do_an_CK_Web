@@ -66,7 +66,7 @@ endforeach;
             </div>
             <div class="mr-5"><?php echo $dondh ?> đơn hàng</div>
           </div>
-          <a class="card-footer text-white clearfix small z-1" href="/Nhom04_WebsiteBanXeMay/admin/modules/donhang">
+          <a class="card-footer text-white clearfix small z-1" href="/admin/modules/donhang">
             <span class="float-left">Chi tiết</span>
             <span class="float-right">
               <i class="fas fa-angle-right"></i>

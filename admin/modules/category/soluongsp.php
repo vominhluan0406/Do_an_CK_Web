@@ -27,7 +27,7 @@ $category = $db->fetchAll("soluongsp");
           <tbody>
             <?php foreach ($category as $item) : ?>
               <tr>
-                <form action="/Nhom04_WebsiteBanXeMay/admin/modules/category/updatesl.php" method="get">
+                <form action="/admin/modules/category/updatesl.php" method="get">
                 <td><input class="form-control" type="text" name="id" value="<?php echo $item['MaSP'] ?>" readonly></td>
                 <td><input class="form-control" type="number" value="<?php echo $item['Soluong'] ?>" name="soluong"></td>
                 <td>

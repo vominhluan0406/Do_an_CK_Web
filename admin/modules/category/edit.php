@@ -7,7 +7,7 @@ $category = $db->fetchIDOne('sanpham', '*', 'MaSp', $_GET['id']);
 $message = "";
 
 if (!$category) {
-  header("Location: /Nhom04_WebsiteBanXeMay/admin/modules/category");
+  header("Location: /admin/modules/category");
 }
 ?>
 
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $key = ['MaLoai', 'TenSP', 'HangSX', 'Anh', 'Gia', 'GioiThieu', 'ThongTin'];
   $data = [$loai, $ten, $hang, $image, $gia, $gioithieu, $thongtin];
   $message = $db->update("sanpham", $data, $key, 'MaSp', $id);
-  header("Location: /Nhom04_WebsiteBanXeMay/admin/modules/category");
+  header("Location: /admin/modules/category");
 }
 ?>
 
@@ -109,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="file-upload-wrapper">
           <input type="file" name="image" class="file-upload" data-height="500" onchange="readURL(this);" />
-          <img id="blah" style="width:20%" src="/Nhom04_WebsiteBanXeMay/img/<?php echo $category['Anh'] ?>" class="img-thumbnail">
+          <img id="blah" style="width:20%" src="/img/<?php echo $category['Anh'] ?>" class="img-thumbnail">
         </div>
         <button type="submit" class="btn btn-primary btn-lg btn-block">Cập nhật</button>
         <div class="alert alert-success" role="alert">

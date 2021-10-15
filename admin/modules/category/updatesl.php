@@ -17,5 +17,5 @@
 
         $db->update('soluongsp',$sl,$key,'MaSP',$id);
     }
-    header('Location: /Nhom04_WebsiteBanXeMay/admin/modules/category/soluongsp.php');
+    header('Location: /admin/modules/category/soluongsp.php');
 ?>

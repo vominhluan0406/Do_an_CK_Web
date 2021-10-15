@@ -7,5 +7,5 @@
             $db->delete('sanpham','MaSp',$_GET['id']);
         }
     }
-    header('Location: /Nhom04_WebsiteBanXeMay/admin/modules/category');
+    header('Location: /admin/modules/category');
 ?>

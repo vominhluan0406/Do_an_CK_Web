@@ -11,11 +11,9 @@ if (isset($_GET['id'])) {
   // Kiem tra 
   $num = $db->find('sanpham', [$id], ['TenSP']);
 
-  $url =   $_SERVER['REQUEST_URI'];
-  $url = explode('/', $url)[1];
   if ($num != 0) {
     $id = $db->fetchIDOne('sanpham', 'MaSp', 'TenSP', $id)['MaSp'];
-    header("Location: /$url/single-product.php?id=$id");
+    header("Location: /single-product.php?id=$id");
     exit;
   } else {
     echo '<script>

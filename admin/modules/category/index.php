@@ -33,12 +33,12 @@ $category = $db->fetchAll("sanpham");
                 <td><?php echo $item['MaSp'] ?></td>
                 <td><?php echo $item['TenSP'] ?></td>
                 <td><?php echo $db->fetchIDOne("loaisp", "TenLoai", "MaLoai", $item['MaLoai'])['TenLoai'] ?></td>
-                <td><img id="blah" src="/Nhom04_WebsiteBanXeMay/img/<?php echo $item['Anh']?>" class="img-rounded" style="width:10%;height:auto;"></td>
+                <td><img id="blah" src="/img/<?php echo $item['Anh']?>" class="img-rounded" style="width:10%;height:auto;"></td>
                 <td><?php echo $item['HangSX'] ?></td>
                 <td><?php echo $item['Gia'] ?></td>
                 <td>
-                  <a class="btn btn-primary" href="/Nhom04_WebsiteBanXeMay/admin/modules/category/edit.php?id=<?php echo $item['MaSp']; ?>"><i class="fa fa-edit"></i>Sửa</a>
-                  <a class="btn btn-danger" href="/Nhom04_WebsiteBanXeMay/admin/modules/category/delete.php?id=<?php echo $item['MaSp']; ?>"><i class="fa fa-times"></i>Xóa</a>
+                  <a class="btn btn-primary" href="/admin/modules/category/edit.php?id=<?php echo $item['MaSp']; ?>"><i class="fa fa-edit"></i>Sửa</a>
+                  <a class="btn btn-danger" href="/admin/modules/category/delete.php?id=<?php echo $item['MaSp']; ?>"><i class="fa fa-times"></i>Xóa</a>
                 </td>
               </tr>
             <?php endforeach; ?>

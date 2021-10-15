@@ -39,7 +39,7 @@
         $tmp = [$MaKH,$UserName,$Pass,$HoTen,$Ngaysinh,$CMND,$DiaChi,$Email,$SDT,$NgayDK];
         
         $db->insert('khachhang',$tmp);
-        header("Location: /Nhom04_WebsiteBanXeMay/login.php");
+        header("Location: /login.php");
         exit;
     }
 ?>

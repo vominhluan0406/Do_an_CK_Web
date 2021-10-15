@@ -34,4 +34,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['loi'] = "Nhập thiếu dữ liệu!";
     }
 }
-header("Location: /Nhom04_WebsiteBanXeMay/admin/mk.php");
+header("Location: /admin/mk.php");
